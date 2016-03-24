@@ -21,58 +21,61 @@ details. Read more about [AnimatedEditText](https://medium.com/@ali.muzaffar),
 
 ###Gradle
 
-``` dependencies{
-`compile 'com.alimuzaffar.lib:animated-edit-text:0.0.2'`
+```groovy
+dependencies {
+ compile 'com.alimuzaffar.lib:animated-edit-text:0.0.2'
 }
 ```
 
 ##STEP-2
 
 ### Setup AnimatedTextView and PinEntryView in your layout
+```xml
+<com.alimuzaffar.lib.widgets.PinEntryEditText
+    android:id="@+id/txt_pin_entry"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:cursorVisible="false" <!-- recommended -->
+    android:digits="1234567890"
+    android:inputType="number"
+    android:maxLength="4" //required
+    android:textIsSelectable="false" <!-- recommended -->
+    android:textSize="20sp"
+    app:pinAnimationType="popIn|fromBottom" <!-- optional -->
+    app:pinCharacterMask="*" //optional
+    app:pinLineColors="@color/pin_line_colors" /> <!-- optional -->
 
-        <com.alimuzaffar.lib.widgets.PinEntryEditText
-            android:id="@+id/txt_pin_entry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:cursorVisible="false" //recommended
-            android:digits="1234567890"
-            android:inputType="number"
-            android:maxLength="4" //required
-            android:textIsSelectable="false" //recommended
-            android:textSize="20sp"
-            app:pinAnimationType="popIn|fromBottom" //optional
-			app:pinCharacterMask="*" //optional
-            app:pinLineColors="@color/pin_line_colors" /> //optional
-
-        <com.alimuzaffar.lib.widgets.AnimatedEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Animate pop in"
-            android:inputType="textNoSuggestions" //recommended when typing text to avoid autocomplete.
-            app:pinAnimationType="popIn|fromBottom|fromRight|fromMiddle" //optional
-            app:animationType="popIn" /> //optional
+<com.alimuzaffar.lib.widgets.AnimatedEditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Animate pop in"
+    android:inputType="textNoSuggestions" <!-- recommended when typing text to avoid autocomplete. -->
+    app:pinAnimationType="popIn|fromBottom|fromRight|fromMiddle" <!-- optional -->
+    app:animationType="popIn" /> <!-- optional -->
+```
 
 ### Listen for pin entry and setup TextDrawable in code
-
-        EditText regular = (EditText) findViewById(R.id.txt_regular);
-        final PinEntryEditText pinEntry = (PinEntryEditText) findViewById(R.id.txt_pin_entry);
-        if (pinEntry != null) {
-            pinEntry.setAnimateText(true); //needed, no animation by default for PinEntryEditText
-            pinEntry.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
-                @Override
-                public void onPinEntered(CharSequence str) {
-                    if (str.toString().equals("1234")) {
-                        Toast.makeText(AnimatedEditTextWidgetsActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(AnimatedEditTextWidgetsActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
-                        pinEntry.setText(null);
-                    }
-                }
-            });
+```java
+EditText regular = (EditText) findViewById(R.id.txt_regular);
+final PinEntryEditText pinEntry = (PinEntryEditText) findViewById(R.id.txt_pin_entry);
+if (pinEntry != null) {
+    pinEntry.setAnimateText(true); //needed, no animation by default for PinEntryEditText
+    pinEntry.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
+        @Override
+        public void onPinEntered(CharSequence str) {
+            if (str.toString().equals("1234")) {
+                Toast.makeText(AnimatedEditTextWidgetsActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AnimatedEditTextWidgetsActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
+                pinEntry.setText(null);
+            }
         }
-        if (regular != null) {
-            regular.setCompoundDrawables(new TextDrawable(regular, "+61 "), null, new TextDrawable(regular, "\u2605"), null);
-        }
+    });
+}
+if (regular != null) {
+    regular.setCompoundDrawables(new TextDrawable(regular, "+61 "), null, new TextDrawable(regular, "\u2605"), null);
+}
+```
 
 ## Effects :
 
