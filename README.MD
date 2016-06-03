@@ -3,7 +3,7 @@
 This repository contains `AnimatedEditText` and `TextDrawable` all of which
 extend the behaviour of `EditText` and implement features that are otherwise not available.
 
-**NOTE:** [`PinEntryEditText` has been moved to it's own repo on GitHub](https://github.com/alphamu/PrefixEditText).
+**NOTE:** [`PinEntryEditText` has been moved to it's own repo on GitHub](https://github.com/alphamu/PinEntryEditText).
 
 ![pop in animation](http://i.giphy.com/x1AsZJypT6rmw.gif) 
 
@@ -19,7 +19,7 @@ extend the behaviour of `EditText` and implement features that are otherwise not
 
 ### PinEntryEditText
 
-[PinEntryEditText has been moved to it's own repo on GitHub](https://github.com/alphamu/PrefixEditText).
+[PinEntryEditText has been moved to it's own repo on GitHub](https://github.com/alphamu/PinEntryEditText).
 
 ### Others
 
